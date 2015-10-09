@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define SYSCALL(x, y) asm volatile("int $0x80" :: "b"(x), "c"(y)) 
+#define SYSCALL(x, y) asm volatile("int $0x80" :: "b"(x), "c"(y))
 
 #define GETDATA_SYSCALL_NUM 7           //*< get data about the environment
 #define MALLOC_SYSCALL_NUM 8            //*< userspace malloc, allocate a page to the next continuous virtual address
