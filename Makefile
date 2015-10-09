@@ -1,15 +1,14 @@
 TARGET = ApertureOS_Lib.a
 
-CC=clang
+CC=~/opt/cross/bin/i686-elf-gcc
 CFLAGS = -ffreestanding -nostdlib -O3 -I. -Iinclude
 
-OBJS = syscalls.o
+OBJS = stubs.o
 
 .PHONY: all
 
 all:$(OBJS)
-	ar -rc $(OBJS) 
-	mv $(TARGET) lib/$(TARGET)
+	ar -rcs $(TARGET) $(OBJS)
 
 clean:
 	rm -rf lib
