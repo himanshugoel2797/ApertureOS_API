@@ -2,11 +2,12 @@
 #define _AOS_SYSCALLS_H_
 
 #include <stdint.h>
+#include <stddef.h>
 
-#define SYSCALL(x, y) asm volatile("int $0x80" :: "b"(x), "c"(y))
+#include "displayinfo.h"
 
-#define GETDATA_SYSCALL_NUM 7           //*< get data about the environment
-#define MALLOC_SYSCALL_NUM 8            //*< userspace malloc, allocate a page to the next continuous virtual address
+#define GETDATA_SYSCALL_NUM 0           //*< get data about the environment
+#define MALLOC_SYSCALL_NUM 1            //*< userspace malloc, allocate a page to the next continuous virtual address
 
 //* The type of the data to access
 typedef enum
@@ -53,5 +54,12 @@ typedef struct
     uint64_t arg2;
     uint64_t retval;
 } generic_syscall_3;
+
+uint64_t syscall_1arg(uint32_t syscall_num, uint64_t arg0);
+uint64_t syscall_2arg(uint32_t syscall_num, uint64_t arg0, uint64_t arg1);
+uint64_t syscall_3arg(uint32_t syscall_num, uint64_t arg0, uint64_t arg1, uint64_t arg2);
+
+uint32_t aos_getDisplayInfo(DisplayInfo *info);
+uint64_t aos_getPID(void);
 
 #endif
